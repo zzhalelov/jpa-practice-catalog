@@ -1,4 +1,4 @@
-package org.example.jpa;
+package org.example.jpa.service;
 
 import jakarta.persistence.*;
 import org.example.jpa.entity.Category;
@@ -190,6 +190,29 @@ public class CatalogService {
             // Remove entity from database
             manager.remove(product);
             manager.getTransaction().commit();
+        } catch (Exception e) {
+            manager.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static void showAll() {
+        EntityManager manager = factory.createEntityManager();
+        try {
+            manager.getTransaction().begin();
+
+            //select products to display
+            TypedQuery<Product> productTypedQuery = manager.createQuery(
+                    "SELECT p FROM Product p ORDER BY p.name", Product.class
+            );
+            List<Product> products = productTypedQuery.getResultList();
+            for (int i = 0; i < products.size(); i++) {
+                System.out.println(products.get(i).getId()
+                        + products.get(i).getName()
+                        + products.get(i).getPrice());
+            }
         } catch (Exception e) {
             manager.getTransaction().rollback();
             e.printStackTrace();
