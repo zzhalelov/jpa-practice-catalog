@@ -52,15 +52,6 @@ public class MenuController {
                 """);
     }
 
-    public static void authorization() {
-        String role = UserService.getRole();
-        switch (role) {
-            case "admin" -> run();
-            case "manager" -> run();
-            case "client" -> run();
-        }
-    }
-
     public static void run() {
         switch (role) {
             case "admin" -> {
@@ -71,6 +62,7 @@ public class MenuController {
                         case "1" -> runCreateMenu();
                         case "2" -> CatalogService.update();
                         case "3" -> CatalogService.delete();
+                        case "4" -> CatalogService.showAll();
                         case "0" -> {
                             System.out.println("Exit");
                             return;
@@ -85,6 +77,7 @@ public class MenuController {
                     switch (command) {
                         case "1" -> runCreateMenu();
                         case "2" -> CatalogService.update();
+                        case "3" -> CatalogService.showAll();
                         case "0" -> {
                             System.out.println("Exit");
                             return;
@@ -97,7 +90,7 @@ public class MenuController {
                     printMenu();
                     String command = scanner.nextLine();
                     switch (command) {
-                        case "1" -> runCreateMenu(); //show all list of products
+                        case "1" -> CatalogService.showAll();
                         case "0" -> {
                             System.out.println("Exit");
                             return;

@@ -74,7 +74,7 @@ public class CatalogService {
                 manager.persist(value);
             }
             manager.getTransaction().commit();
-            System.out.println("Product added succesfully");
+            System.out.println("Product added successfully");
         } catch (Exception e) {
             manager.getTransaction().rollback();
             e.printStackTrace();
@@ -209,8 +209,8 @@ public class CatalogService {
             );
             List<Product> products = productTypedQuery.getResultList();
             for (int i = 0; i < products.size(); i++) {
-                System.out.println(products.get(i).getId()
-                        + products.get(i).getName()
+                System.out.println(products.get(i).getId() + " \n"
+                        + products.get(i).getName() + " \n"
                         + products.get(i).getPrice());
             }
         } catch (Exception e) {
